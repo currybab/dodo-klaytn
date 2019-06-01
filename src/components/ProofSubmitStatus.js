@@ -176,7 +176,7 @@ class ProofSubmitStatus extends Component {
       }
     }
     const date = Math.floor(new Date().getTime() / 1000);
-    if(date > this.props.info.endDate * 1 + this.props.info.claimed * 1 * 3600 * 24 * 2) {
+    if(date > this.props.info.endDate * 1 + (this.props.status.claimed * 1 + 1) * 3600 * 24 * 2) {
       return (
         <div>
           <Button
