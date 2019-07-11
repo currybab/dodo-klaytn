@@ -44,7 +44,7 @@ class InputDatePage extends Component {
     this.setState({ loading: true });
     try {
       const contract = new cav.klay.Contract(contractJson.abi, contractJson.networks["1001"].address);
-      const gasAmount = await contract.methods.createProject(this.props.contract.projectName,
+      let gasAmount = await contract.methods.createProject(this.props.contract.projectName,
         "",
         this.props.contract.startTime,
         this.props.contract.endTime
@@ -52,7 +52,7 @@ class InputDatePage extends Component {
         from: this.props.auth.values.address, 
         value: cav.utils.toPeb(`${this.props.contract.betAmount}`),
       });
-    
+      if(gasAmount < 800000) gasAmount = 800000;
       contract.methods.createProject(this.props.contract.projectName,
         "",
         this.props.contract.startTime,
